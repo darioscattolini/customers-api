@@ -6,7 +6,10 @@ export class CustomersService {
   private customers: CustomerDto[] = [];
 
   public create(customer: CustomerDto): CustomerDto {
+    const id = this.customers.length;
+    customer.id = id;
     this.customers.push(customer);
+
     return customer;
   }
 
