@@ -14,5 +14,5 @@ export class CustomerDto {
   public email: string;
 
   @IsDateString()
-  public birthday: string;
+  public birthdate: string;
 }
