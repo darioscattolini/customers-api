@@ -51,3 +51,11 @@ $ npm run test:cov
 * [Jest](https://jestjs.io/) is the testing framework used for unit testing. It
   is the testing framework I am most familiar with and is provided by default by
   Nest.js.
+
+## Design choices
+
+Although the API requirements are fairly simple, dealing only with the Customers
+entity, I decided to dedicate a specific Nest feature module for all
+customer-related code. If the API scales and new entities need to be handled,
+new feature modules can be added and it would not require to refactor the main
+App module.
