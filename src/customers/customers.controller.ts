@@ -1,7 +1,10 @@
 import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { CustomersService } from './customers.service';
 
 @Controller('customers')
 export class CustomersController {
+  constructor(private customersService: CustomersService) {}
+
   @Post()
   public create() {
     return 'This should create customer with specified data';
