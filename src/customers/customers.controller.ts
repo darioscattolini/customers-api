@@ -16,17 +16,17 @@ export class CustomersController {
   constructor(private customersService: CustomersService) {}
 
   @Post('/')
-  public create(@Body() customer: CustomerDto): CustomerDto {
+  public create(@Body() customer: CustomerDto): Promise<CustomerDto> {
     return this.customersService.create(customer);
   }
 
   @Get('/')
-  public findAll(): CustomerDto[] {
+  public findAll(): Promise<CustomerDto[]> {
     return this.customersService.findAll();
   }
 
   @Get(':id')
-  public findeOne(@Param('id', ParseIntPipe) id: number) {
+  public findeOne(@Param('id', ParseIntPipe) id: number): Promise<CustomerDto> {
     return this.customersService.findOne(id);
   }
 
@@ -34,12 +34,12 @@ export class CustomersController {
   public update(
     @Param('id', ParseIntPipe) id: number,
     @Body() customer: CustomerDto,
-  ) {
+  ): Promise<CustomerDto> {
     return this.customersService.update(id, customer);
   }
 
   @Delete(':id')
-  public remove(@Param('id', ParseIntPipe) id: number): void {
+  public remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.customersService.remove(id);
   }
 }

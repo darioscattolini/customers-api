@@ -1,41 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CustomerDto } from './customer.dto';
+import { Customer } from './entities/customer.entity';
 
 @Injectable()
 export class CustomersService {
-  private customers: CustomerDto[] = [];
+  constructor(
+    @InjectRepository(Customer)
+    private repository: Repository<Customer>,
+  ) {}
 
-  public create(customer: CustomerDto): CustomerDto {
-    const id = this.customers.length;
-    customer.id = id;
-    this.customers.push(customer);
-
-    return customer;
+  public async create(customer: CustomerDto): Promise<CustomerDto> {
+    return await this.repository.save(customer);
   }
 
-  public findAll(): CustomerDto[] {
-    return this.customers.slice();
+  public async findAll(): Promise<CustomerDto[]> {
+    return await this.repository.find();
   }
 
-  public findOne(id: number): CustomerDto {
-    return this.customers.find((customer) => customer.id === id);
+  public async findOne(id: number): Promise<CustomerDto> {
+    return await this.repository.findOne(id);
   }
 
-  public remove(id: number): void {
-    const index = this.customers.findIndex((customer) => customer.id === id);
-    this.customers.splice(index, 1);
+  public async remove(id: number): Promise<void> {
+    await this.repository.delete(id);
   }
 
-  public update(id: number, customer: CustomerDto): CustomerDto {
-    const index = this.customers.findIndex((customer) => customer.id === id);
-
-    customer = {
-      ...customer,
-      id,
-    };
-
-    this.customers[index] = customer;
-
-    return customer;
+  public async update(id: number, customer: CustomerDto): Promise<CustomerDto> {
+    return await this.repository.save({ ...customer, id });
   }
 }
