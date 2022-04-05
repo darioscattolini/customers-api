@@ -8,15 +8,17 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CustomerDto } from './dto/customer.dto';
 import { CustomersService } from './customers.service';
+import { CustomerDto } from './dto/customer.dto';
+import { CreateCustomerDto } from './dto/create-customer.dto';
+import { UpdateCustomerDto } from './dto/update-customer.dto';
 
 @Controller('customers')
 export class CustomersController {
   constructor(private customersService: CustomersService) {}
 
   @Post('/')
-  public create(@Body() customer: CustomerDto): Promise<CustomerDto> {
+  public create(@Body() customer: CreateCustomerDto): Promise<CustomerDto> {
     return this.customersService.create(customer);
   }
 
@@ -33,7 +35,7 @@ export class CustomersController {
   @Put(':id')
   public update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() customer: CustomerDto,
+    @Body() customer: UpdateCustomerDto,
   ): Promise<CustomerDto> {
     return this.customersService.update(id, customer);
   }

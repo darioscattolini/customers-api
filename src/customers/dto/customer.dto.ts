@@ -3,14 +3,14 @@ import {
   IsEmail,
   IsInt,
   IsNotEmpty,
-  IsOptional,
+  IsDefined,
   IsPositive,
   IsString,
   MaxLength,
 } from 'class-validator';
 
 export class CustomerDto {
-  @IsOptional()
+  @IsDefined()
   @IsInt()
   @IsPositive()
   public id: number;
