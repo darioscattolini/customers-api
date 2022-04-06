@@ -64,6 +64,10 @@ $ npm run test:cov
 
 ## Design choices
 
+* Besides the traditional PUT request method for updating all fields of the
+  Customer entity, I have implemented a PATCH method allowing for partial
+  updates.
+
 * Although the API requirements are fairly simple, dealing only with the
   Customers entity, I decided to dedicate a specific Nest feature module for all
   customer-related code. If the API scales and new entities need to be handled,
