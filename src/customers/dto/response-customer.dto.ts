@@ -9,30 +9,34 @@ import {
   MaxLength,
 } from 'class-validator';
 
-export class CustomerDto {
-  @IsDefined()
-  @IsInt()
+export class ResponseCustomer {
   @IsPositive()
+  @IsInt()
+  @IsDefined()
   public id: number;
 
-  @IsNotEmpty()
-  @IsString()
   @MaxLength(50)
+  @IsString()
+  @IsNotEmpty()
+  @IsDefined()
   public name: string;
 
-  @IsString()
-  @IsNotEmpty()
   @MaxLength(50)
+  @IsNotEmpty()
+  @IsString()
+  @IsDefined()
   public surname: string;
 
-  @IsString()
-  @IsNotEmpty()
   @MaxLength(254)
   @IsEmail()
+  @IsNotEmpty()
+  @IsString()
+  @IsDefined()
   public email: string;
 
-  @IsString()
-  @IsNotEmpty()
   @IsDateString()
+  @IsNotEmpty()
+  @IsString()
+  @IsDefined()
   public birthdate: string;
 }
