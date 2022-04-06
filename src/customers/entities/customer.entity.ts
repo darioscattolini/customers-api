@@ -13,27 +13,29 @@ import {
 @Entity()
 export class Customer {
   @PrimaryGeneratedColumn()
-  @IsDefined()
-  @IsInt()
   @IsPositive()
+  @IsInt()
+  @IsDefined()
   public id: number;
 
   @Column({
     length: 50,
     nullable: false,
   })
-  @IsNotEmpty()
-  @IsString()
   @MaxLength(50)
+  @IsString()
+  @IsNotEmpty()
+  @IsDefined()
   public name: string;
 
   @Column({
     length: 50,
     nullable: false,
   })
-  @IsString()
-  @IsNotEmpty()
   @MaxLength(50)
+  @IsNotEmpty()
+  @IsString()
+  @IsDefined()
   public surname: string;
 
   @Column({
@@ -41,18 +43,20 @@ export class Customer {
     nullable: false,
     unique: true,
   })
-  @IsString()
-  @IsNotEmpty()
-  @MaxLength(254)
   @IsEmail()
+  @MaxLength(254)
+  @IsNotEmpty()
+  @IsString()
+  @IsDefined()
   public email: string;
 
   @Column({
     length: 10,
     nullable: false,
   })
-  @IsString()
-  @IsNotEmpty()
   @IsDateString()
+  @IsNotEmpty()
+  @IsString()
+  @IsDefined()
   public birthdate: string;
 }
