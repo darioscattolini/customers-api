@@ -1,6 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import {
-  IsDateString,
   IsDefined,
   IsEmail,
   IsInt,
@@ -9,6 +8,7 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
+import { IsValidDate } from '../../utilities/errors/is-valid-date.validator';
 
 @Entity()
 export class Customer {
@@ -54,7 +54,7 @@ export class Customer {
     length: 10,
     nullable: false,
   })
-  @IsDateString()
+  @IsValidDate()
   @IsNotEmpty()
   @IsString()
   @IsDefined()

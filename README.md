@@ -48,9 +48,12 @@ $ npm run test:cov
   use of TypeScript and Jest. I come from a front-end background and Angular is
   the framework I am most familiar with, so I considered that this would be the
   best choice for my first server-side app.
-* [Jest](https://jestjs.io/) is the testing framework used for unit testing. It
-  is the testing framework I am most familiar with and is provided by default by
-  Nest.js.
+* [Jest](https://jestjs.io/) is the testing framework used for unit and
+  integration tests. It is provided by default by Nest.js, extended with
+  [SuperTest](https://github.com/visionmedia/supertest) library for HTTP
+  assertions used in e2e testing. I have also extended it with
+  [jest-extended](https://github.com/jest-community/jest-extended) for
+  additional matchers.
 * [TypeORM](https://typeorm.io/) is an ORM used to enforce the Data Mapper
   pattern for data persistence and to decouple persistence logic from particular
   databases. It was chosen because it supports SQL.js.
@@ -61,6 +64,8 @@ $ npm run test:cov
   add validation constraints to TypeORM entity and DTO classes. It is
   integrated with Nest.js built-in ValidationPipe, making validation errors
   handling very easy.
+* [Day.js](https://day.js.org/) date and time library is used in a custom date
+  validator.
 
 ## Design choices
 
@@ -70,7 +75,7 @@ $ npm run test:cov
 
 * Although the API requirements are fairly simple, dealing only with the
   Customers entity, I decided to dedicate a specific Nest feature module for all
-  customer-related code. If the API scales and new entities need to be handled,
+  customer-related code. If the API grows and new entities need to be handled,
   new feature modules can be added, and it would not require refactoring the
   main App module.
 
@@ -93,7 +98,16 @@ $ npm run test:cov
   concerns between persistence and business layer on the one hand and
   presentation layer on the other, and between different requirements in the
   presentation layer (for creating, updating and retrieving customers). This
-  will be helpful for scalability, because an eventual divergence between API
-  models and persistence entities will be easier to implement, and it has been
-  helpful to allow for the partial update of customer data. Finally, it is a
+  will be helpful if the API grows, because an eventual divergence between API
+  models and persistence entities will be easier to implement. Besides, it is a
   pattern suggested by the Nest.js framework.
+
+* I decided to implement the test requirements in the assignment as integration
+  tests. Unit tests would perform practically these same tests on controller and
+  service classes, but they would require to mock dependencies (validators, the
+  customer service as controller dependency, and the customer repository as
+  service dependency). Since the database is not an external dependency,
+  integration tests for each CRUD operation are easy to set up and provide a
+  great API specification. Tests cover happy paths and different errors
+  (resources not found and most validation errors), checking some headers,
+  status codes and body interface and content.

@@ -1,5 +1,4 @@
 import {
-  IsDateString,
   IsEmail,
   IsInt,
   IsNotEmpty,
@@ -8,6 +7,7 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
+import { IsValidDate } from '../../utilities/errors/is-valid-date.validator';
 
 export class ResponseCustomer {
   @IsPositive()
@@ -34,7 +34,7 @@ export class ResponseCustomer {
   @IsDefined()
   public email: string;
 
-  @IsDateString()
+  @IsValidDate()
   @IsNotEmpty()
   @IsString()
   @IsDefined()
