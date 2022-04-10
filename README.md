@@ -111,3 +111,5 @@ $ npm run test:cov
   great API specification. Tests cover happy paths and different errors
   (resources not found and most validation errors), checking some headers,
   status codes and body interface and content.
+
+* Composer includes dev mode with debugger

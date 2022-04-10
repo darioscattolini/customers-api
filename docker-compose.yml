@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  dev:
+    container_name: customers_api_dev
+    image: customers-api-dev:1.0.0
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
+    command: npm run start:debug
+    ports:
+      - 3000:3000
+      - 9229:9229
+    networks:
+      - customers-network
+    volumes:
+      - .:/api
+      - /api/node_modules
+    restart: unless-stopped
+  e2e-test:
+    container_name: customers_api_e2e_test
+    image: customers-api-e2e-test:1.0.0
+    build:
+      context: .
+      target: e2e_test
+      dockerfile: ./Dockerfile
+    command: npm run test:e2e
+    ports:
+      - 3000:3000
+    networks:
+      - customers-network
+    volumes:
+      - .:/api
+      - /api/node_modules
+    restart: unless-stopped
+  prod:
+    container_name: customers_api_prod
+    image: customers-api-prod:1.0.0
+    build:
+      context: .
+      target: production
+      dockerfile: ./Dockerfile
+    command: npm run start:prod
+    ports:
+      - 3000:3000
+      - 9229:9229
+    networks:
+      - customers-network
+    volumes:
+      - .:/api
+      - /api/node_modules
+    restart: unless-stopped
+
+networks:
+  customers-network:
