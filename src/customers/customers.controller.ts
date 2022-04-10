@@ -22,7 +22,7 @@ import { NullInterceptor } from '../utilities/errors/null.interceptor';
 @Controller('customers')
 export class CustomersController {
   constructor(private customersService: CustomersService) {}
-
+  /*
   @Post('/')
   @Header('Content-Type', 'application/json')
   @UseInterceptors(NotUniqueInterceptor)
@@ -31,7 +31,7 @@ export class CustomersController {
   ): Promise<ResponseCustomer> {
     return this.customersService.create(customerData);
   }
-
+  */
   @Get('/')
   @Header('Content-Type', 'application/json')
   public findAll(): Promise<ResponseCustomer[]> {
