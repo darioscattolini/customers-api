@@ -8,6 +8,10 @@ import {
 import { catchError, Observable } from 'rxjs';
 import { NotNullConstraintException } from './not-null-constraint.exception';
 
+/**
+ * Catches any NotNullConstraintException and throws appropriate HTTP Bad
+ * Request exception that is received by API user.
+ */
 @Injectable()
 export class NullInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
