@@ -8,6 +8,10 @@ import {
 import { catchError, Observable } from 'rxjs';
 import { UniqueConstraintException } from './unique-constraint.exception';
 
+/**
+ * Catches any UniqueConstraintException and throws appropriate HTTP Bad Request
+ * exception that is received by API user.
+ */
 @Injectable()
 export class NotUniqueInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
